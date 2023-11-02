@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="Desafio Front-end UI/UX da empresa Multipedidos." />
+  <meta name="keywords" content="HTML, CSS, JavaScript, Front-end, TI, Desafio">
+  <meta name="author" content="F. Ewerthon Oliveira">
+
+  <!-- STYLES -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <title>Desafio Multipedidos</title>
+</head>
+
+<body>
+  <header id="headerPrincipal" class="container border">
+    <h1>Cupons de desconto</h1>
+    <p>Ative e crie os cupons de desconto para aumentar suas vendas!</p>
+
+    <form>
+      <fieldset>
+        <label class="switch">
+          <input type="checkbox" id="ativarCupons" name="checkboxAtivarCupons">
+          <span class="slider round"></span>
+        </label>
+        <label for="ativarCupons" class="labelCheckbox">Ativar cupons de desconto</label>
+      </fieldset>
+    </form>
+  </header>
+
+  <main>
+    <article class="container border">
+
+      <h2 class="h2Secundarios">Criar cupom de desconto</h2>
+
+      <!-- ESCOLHER ENTRE DOIS CUPONS BUTTONS -->
+      <div class="radio-buttons">
+        <input type="radio" id="cupomGeral" name="cupomTipo" value="Cupom geral" checked
+          onchange="changeCupomTipe(this.value)" form="formCadastroCupom">
+        <label for="cupomGeral">Cupom geral</label><br>
+
+        <input type="radio" id="cupomUnico" name="cupomTipo" value="Cupom único" onchange="changeCupomTipe(this.value)"
+          form="formCadastroCupom">
+        <label for="cupomUnico">Cupom único</label><br>
+      </div>
+
+      <!-- EXPLICAÇÃO CUPOM UNICO -->
+      <div class="cupomExplicacao border" id="explicacaoCupomUnico">
+        <p><strong>Uso único:</strong> use para atrair seus clientes que ainda não pedem no Multipedidos. Este cupom só
+          pode ser usado 1 vez
+          e você pode imprimi-lo para oferecer para os clientes, para incentiva-los a usar a plataforma pela primeira
+          vez.</p>
+      </div>
+
+      <!-- EXPLICAÇÃO CUPOM GERAL -->
+      <div class="cupomExplicacao border" id="explicacaoCupomGeral">
+        <p><strong>Cupom geral:</strong> use para criar um código fácil de lembrar (ex: DESCONTO10) para divuldar nas
+          redes sociais,
+          whatsapp, panfletos, etc. Ideal para atingir vários clientes de uma só vez</p>
+      </div>
+
+      <!-- FORM CADASTRO DE CUPOM -->
+      <form id="formCadastroCupom">
+        <!-- CAMPO CODIGO DE CUPOM -->
+        <div class="divCamposForm campoCodCupom">
+          <label for="campoTexto">Código do cupom</label>
+          <input type="text" id="campoTexto" name="cupomCodigo" placeholder="EX: DESCONTO10" required onmouseleave="validarCampoCodCupom(this.value)">
+          <p class="errorP" id="codCupomP">O código do cupom deve ser preenchido.</p>
+        </div>
+
+        <!-- CAMPO SELECT TIPO DESCONTO -->
+        <div class="divCamposForm">
+          <label for="selectDesconto">Selecione o tipo de desconto</label>
+          <select id="selectDesconto" name="cupomTipoDesconto" onchange="changeDesconto()" required>
+            <option value="Desconto fixo">Desconto fixo</option>
+            <option value="Porcentagem de desconto">Porcentagem de desconto</option>
+          </select>
+        </div>
+
+        <!-- CAMPO DE PORCENTAGEM -->
+        <div class="divCamposForm" id="inputPorcentagem">
+          <label for="campoPorcentagem">Digite a porcentagem de desconto</label>
+          <div>
+            <input type="number" id="campoPorcentagem" name="cupomPorcentagem" min="1" max="100" placeholder="EX: 10" onmouseleave="validarPorcentagem(this.value)">
+            %
+          </div>
+          <p class="errorP" id="porcentagemP">A porcentagem deve ser preenchida.</p>
+        </div>
+
+        <!-- CAMPO DE DINHEIRO-->
+        <div class="divCamposForm" id="inputDinheiro">
+          <label for="campoDinheiro1">Digite o valor do desconto em reais</label>
+          <div>
+            R$
+            <input type="number" id="dinheiroDesconto" name="cupomValor" step="0.01" min="0.10" placeholder="EX: 10" onmouseleave="validarDinheiroFixo(this.value)">
+          </div>
+          <p class="errorP" id="dinheiroP">O valor de desconto deve ser preenchido.</p>
+        </div>
+
+        <h3>Regras do cupom</h3>
+
+        <!-- SWITCH DE ATIVAR DATA -->
+        <div class="divSwitchs">
+          <label class="switch">
+            <input type="checkbox" id="dataLimiteCheckbox" name="cupomDataLimiteCheck" onchange="hiddeDate()" checked>
+            <span class="slider round"></span>
+          </label>
+          <label for="dataLimiteCheckbox" class="labelCheckbox">Ativar data limite para uso</label>
+        </div>
+
+        <!-- CAMPO DATA LIMITE -->
+        <div class="divCamposForm" id="labelEInputData">
+          <label for="campoData">Data limite do cupom</label>
+          <input type="date" id="campoData" name="cupomDataLimite" min="2023-04-01">
+          <p class="errorP" id="dataLimiteP">A data limite deve ser preenchida.</p>
+        </div>
+
+        <!-- CAMPO VALOR MINIMO -->
+        <div class="divCamposForm">
+          <label for="campoDinheiro2">Valor mínimo do pedido</label>
+          <div>
+            R$
+            <input type="number" id="valorMinimo" name="cupomValorMinimo" step="0.01" placeholder="EX: 10" min="0.10" required onmouseleave="validarValorMinimo(this.value)">
+          </div>
+          <p class="errorP" id="valorMinimoP">O valor mínimo do pedido deve ser preenchido.</p>
+        </div>
+
+        <!-- SWITCH DE IMPRIMIR CUPOM -->
+        <div class="divSwitchs">
+          <label class="switch">
+            <input type="checkbox" id="imprimirCuponsCheckbox" name="cupomImprimirCheck">
+            <span class="slider round"></span>
+          </label>
+          <label for="imprimirCuponsCheckbox" class="labelCheckbox">Ativar imprimir cupom</label>
+        </div>
+
+        <input type="button" id="botaoCadastrar" value="Cadastrar cupom" onclick="isValidForm()">
+      </form>
+
+    </article>
+    <article class="container border">
+      <h2 class="h2Secundarios">Uso de cupons por tipo</h2>
+
+
+    </article>
+  </main>
+
+  <footer>
+    <article class="container border">
+      <h2 class="h2Secundarios">Cupons cadastrados</h2>
+    </article>
+  </footer>
+
+  <script src="scripts.js"></script>
+</body>
+
+</html>
