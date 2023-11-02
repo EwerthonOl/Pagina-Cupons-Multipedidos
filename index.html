@@ -67,7 +67,8 @@
         <!-- CAMPO CODIGO DE CUPOM -->
         <div class="divCamposForm campoCodCupom">
           <label for="campoTexto">Código do cupom</label>
-          <input type="text" id="campoTexto" name="cupomCodigo" placeholder="EX: DESCONTO10" required onmouseleave="validarCampoCodCupom(this.value)">
+          <input type="text" id="campoTexto" name="cupomCodigo" placeholder="EX: DESCONTO10" required
+            onmouseleave="validarCampoCodCupom(this.value)">
           <p class="errorP" id="codCupomP">O código do cupom deve ser preenchido.</p>
         </div>
 
@@ -84,7 +85,8 @@
         <div class="divCamposForm" id="inputPorcentagem">
           <label for="campoPorcentagem">Digite a porcentagem de desconto</label>
           <div>
-            <input type="number" id="campoPorcentagem" name="cupomPorcentagem" min="1" max="100" placeholder="EX: 10" onmouseleave="validarPorcentagem(this.value)">
+            <input type="number" id="campoPorcentagem" name="cupomPorcentagem" min="1" max="100" placeholder="EX: 10"
+              onmouseleave="validarPorcentagem(this.value)">
             %
           </div>
           <p class="errorP" id="porcentagemP">A porcentagem deve ser preenchida.</p>
@@ -95,7 +97,8 @@
           <label for="campoDinheiro1">Digite o valor do desconto em reais</label>
           <div>
             R$
-            <input type="number" id="dinheiroDesconto" name="cupomValor" step="0.01" min="0.10" placeholder="EX: 10" onmouseleave="validarDinheiroFixo(this.value)">
+            <input type="number" id="dinheiroDesconto" name="cupomValor" step="0.01" min="0.10" placeholder="EX: 10"
+              onmouseleave="validarDinheiroFixo(this.value)">
           </div>
           <p class="errorP" id="dinheiroP">O valor de desconto deve ser preenchido.</p>
         </div>
@@ -123,7 +126,8 @@
           <label for="campoDinheiro2">Valor mínimo do pedido</label>
           <div>
             R$
-            <input type="number" id="valorMinimo" name="cupomValorMinimo" step="0.01" placeholder="EX: 10" min="0.10" required onmouseleave="validarValorMinimo(this.value)">
+            <input type="number" id="valorMinimo" name="cupomValorMinimo" step="0.01" placeholder="EX: 10" min="0.10"
+              required onmouseleave="validarValorMinimo(this.value)">
           </div>
           <p class="errorP" id="valorMinimoP">O valor mínimo do pedido deve ser preenchido.</p>
         </div>
@@ -151,6 +155,22 @@
   <footer>
     <article class="container border">
       <h2 class="h2Secundarios">Cupons cadastrados</h2>
+
+      <div id="tableArticle">
+        <table id="data-table">
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Desconto</th>
+              <th>Tipo</th>
+              <th>Pedido mínimo</th>
+              <th>Data limite</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
     </article>
   </footer>
 

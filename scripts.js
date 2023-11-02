@@ -3,6 +3,8 @@ let isValidPorcentagem = false;
 let isValidDinheiroFixo = false;
 let isValidValorMinimo = false;
 
+const cuponsAdicionados = [];
+
 let currentDate = new Date();
 
 console.log(currentDate)
@@ -19,14 +21,14 @@ console.log(dataDeHojePtBR)
 
 function formatDateForInputDate(date) {
   date,
-      month = '' + (date.getMonth() + 1),
-      day = '' + date.getDate(),
-      year = date.getFullYear();
+    month = '' + (date.getMonth() + 1),
+    day = '' + date.getDate(),
+    year = date.getFullYear();
 
-  if (month.length < 2) 
-      month = '0' + month;
-  if (day.length < 2) 
-      day = '0' + day;
+  if (month.length < 2)
+    month = '0' + month;
+  if (day.length < 2)
+    day = '0' + day;
 
   return [year, month, day].join('-');
 }
@@ -74,16 +76,32 @@ function changeCupomTipe(valueTipeCupom) {
   var expCupomUnico = document.getElementById("explicacaoCupomUnico");
   var expCupomGeral = document.getElementById("explicacaoCupomGeral");
 
+  var campoCodigoCupom = document.getElementById("campoTexto");
+
   if (valueTipeCupom == "Cupom geral") {
     expCupomUnico.style.display = "none";
     expCupomGeral.style.display = "flex";
+
+    campoCodigoCupom.value = "";
+    campoCodigoCupom.removeAttribute("readonly")
   } else if (valueTipeCupom == "Cupom único") {
     expCupomUnico.style.display = "flex";
     expCupomGeral.style.display = "none";
+
+    campoCodigoCupom.value = randomString();
+    campoCodigoCupom.setAttribute("readonly", "true")
   }
 }
 changeCupomTipe(document.getElementById("cupomGeral").value);
 
+function randomString() {
+  var result = '';
+  var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  for (var i = 0; i < 5; i++) {
+      result += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+  return result;
+}
 function validarCampoCodCupom(valueCodCupom) {
   var codCupomElement = document.getElementById("campoTexto");
   var codCupomP = document.getElementById("codCupomP");
@@ -176,6 +194,8 @@ function enviarForm() {
   const jsonData = Object.fromEntries(data.entries());
   console.log(jsonData);
 
+  addCupomNaTabela(jsonData)
+
   alert('Formulário enviado');
 
   resetValuesAndValidsForm();
@@ -192,4 +212,31 @@ function resetValuesAndValidsForm() {
   isValidDinheiroFixo = false;
   isValidPorcentagem = false;
   isValidValorMinimo = false;
+}
+
+const table = document.getElementById('data-table');
+function addCupomNaTabela(cupomNovo) {
+
+  infosCupomNaTabela = {
+    codigo: cupomNovo.cupomCodigo,
+    desconto: cupomNovo.cupomPorcentagem != "" ? cupomNovo.cupomPorcentagem : cupomNovo.cupomValor,
+    tipo: cupomNovo.cupomTipo == "Cupom geral" ? "GERAL" : "ÚNICO",
+    pedidoMinimo: cupomNovo.cupomValorMinimo,
+    dataLimite: cupomNovo.cupomDataLimite
+  }
+
+  console.log(infosCupomNaTabela)
+
+  cuponsAdicionados.push(infosCupomNaTabela)
+
+  cuponsAdicionados.sort((a, b) => new Date(a.campoData) - new Date(b.campoData));
+
+  cuponsAdicionados.forEach(item => {
+    const row = table.insertRow();
+
+    Object.values(item).forEach(val => {
+      const cell = row.insertCell();
+      cell.textContent = val;
+    });
+  });
 }
