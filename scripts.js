@@ -9,6 +9,8 @@ let isValidValorMinimo = false;
 // ARRAY DOS CUPONS CADASTRADOS
 const cuponsAdicionados = [];
 
+let quantidadeDeCupomUnico = 0;
+let quantidadeDeCupomGeral = 0;
 
 // DATA DE HOJE
 let currentDate = new Date();
@@ -91,6 +93,7 @@ function changeCupomTipe(valueTipeCupom) {
     expCupomGeral.style.display = "none";
 
     campoCodigoCupom.value = randomString();
+    validarCampoCodCupom(campoCodigoCupom.value)
     campoCodigoCupom.setAttribute("readonly", "true")
   }
 }
@@ -193,6 +196,8 @@ function isValidForm() {
   if (isValidCodCupom && isValidPorcentagem && isValidDinheiroFixo && isValidValorMinimo) {
     enviarForm();
 
+    
+
     return true;
   } else {
     alert("Preencha as informações e regras do cupom.")
@@ -253,8 +258,10 @@ function addCupomNaTabela(cupomNovo) {
       cell.textContent = val;
     });
   });
-}
 
+  // quantidadeDeCupomGeral = getElementCount(cuponsAdicionados, "Cupom geral")
+  // quantidadeDeCupomUnico = getElementCount(cuponsAdicionados, "Cupom único")
+}
 
 // Carregar a biblioteca Chart.js
 const script = document.createElement('script');
@@ -266,7 +273,7 @@ script.onload = () => {
         labels: labels,
         datasets: [{
             label: "Legenda",
-            data: [12, 19],
+            data: [5, 10],
             backgroundColor: [
                 '#dd2525',
                 '#2196f3',
@@ -297,3 +304,17 @@ script.onload = () => {
     });
 };
 document.body.appendChild(script);
+
+// const getElementCount = (objectsArray, elementType) => {
+//   let count = 0;
+ 
+//   for (let i = 0; i < objectsArray.length; i++) {
+//      const element = objectsArray[i];
+ 
+//      if (element.cupomTipo === elementType) {
+//        count++;
+//      }
+//   }
+ 
+//   return count;
+//  };

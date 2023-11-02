@@ -326,14 +326,13 @@ label {
 }
 
 .chart-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin: 0 auto;
+  width: 80%;
 }
 
 #bar-chart {
-  width: 90% ;
-  height: 90% ;
+  width: 90%;
+  height: 90%;
 }
 
 table {
@@ -425,6 +424,15 @@ th {
 }
 
 @media (min-width: 1300px) {
+  #formCadastroCupom {
+    gap: 1rem;
+  }
+  
+  .divCamposDataAndValorLimite {
+    gap: 1rem;
+  }
+
+
   #sectionFormAndGrafic {
     display: flex;
     flex-direction: row;
