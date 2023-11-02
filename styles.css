@@ -127,7 +127,7 @@ input:checked+.slider:before {
   margin-bottom: 1rem;
 }
 
-.articleForm {
+#articleForm {
   display: flex;
   flex-direction: column;
 }
@@ -264,7 +264,7 @@ label {
   gap: 1rem;
 }
 
-#divContainerCodigoAndSelectCupom{
+#divContainerCodigoAndSelectCupom {
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -320,6 +320,22 @@ label {
   overflow-x: auto;
 }
 
+#articleGrafic {
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#bar-chart {
+  width: 90% ;
+  height: 90% ;
+}
+
 table {
   border-collapse: collapse;
   width: 100%;
@@ -348,7 +364,7 @@ th {
   .divCamposDataAndValorLimite {
     display: flex;
     flex-direction: row;
-    gap: 2rem;
+    gap: 3rem;
 
     margin-bottom: 1rem;
   }
@@ -366,7 +382,7 @@ th {
 }
 
 @media (min-width: 525px) {
-  #divContainerCodigoAndSelectCupom{
+  #divContainerCodigoAndSelectCupom {
     flex-direction: row;
   }
 }
@@ -376,6 +392,10 @@ th {
     flex-direction: row;
 
     gap: 8rem;
+  }
+
+  #formCadastroCupom #h3Informacoes {
+    margin-top: -1rem;
   }
 
   #divCodigoSelecPorcentagemDinheiro {
@@ -398,8 +418,27 @@ th {
     gap: 2rem;
   }
 
-  .divCamposDataAndValorLimite{
+  .divCamposDataAndValorLimite {
     margin-bottom: 0;
     margin-top: 1rem;
+  }
+}
+
+@media (min-width: 1300px) {
+  #sectionFormAndGrafic {
+    display: flex;
+    flex-direction: row;
+
+    gap: 2rem;
+  }
+
+  #articleForm {
+    order: 1;
+    width: 50vw;
+  }
+
+  #articleGrafic {
+    order: 0;
+    width: 50vw;
   }
 }
