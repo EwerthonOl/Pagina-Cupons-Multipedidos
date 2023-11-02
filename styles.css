@@ -187,7 +187,10 @@ h1{
 
  #formCadastroCupom h3{
   font-weight: bold;
+  font-size: 1.3rem;
   color: var(--blueColor); 
+
+  align-self: center;
  }
 
 #formCadastroCupom {
@@ -204,7 +207,7 @@ input[type="date"],
 select {
   margin-bottom: 10px;
   padding: 10px;
-  border: 1px solid var(--grayColor);
+  border: 2px solid var(--grayColor);
   border-radius: 4px;
   font-size: 16px;
 

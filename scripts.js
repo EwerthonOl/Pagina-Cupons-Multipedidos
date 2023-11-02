@@ -1,6 +1,11 @@
-let date = new Date();
+let isValidCodCupom = false;
+let isValidPorcentagem = false;
+let isValidDinheiroFixo = false;
+let isValidValorMinimo = false;
 
-console.log(date)
+let currentDate = new Date();
+
+console.log(currentDate)
 
 let formateData = new Intl.DateTimeFormat('pt-BR', {
   day: '2-digit',
@@ -8,14 +13,25 @@ let formateData = new Intl.DateTimeFormat('pt-BR', {
   year: 'numeric'
 });
 
-let dataDeHojePtBR = `${formateData.format(date)}`;
+let dataDeHojePtBR = `${formateData.format(currentDate)}`;
 
 console.log(dataDeHojePtBR)
 
-let isValidCodCupom = false;
-let isValidPorcentagem = false;
-let isValidDinheiroFixo = false;
-let isValidValorMinimo = false;
+function formatDateForInputDate(date) {
+  date,
+      month = '' + (date.getMonth() + 1),
+      day = '' + date.getDate(),
+      year = date.getFullYear();
+
+  if (month.length < 2) 
+      month = '0' + month;
+  if (day.length < 2) 
+      day = '0' + day;
+
+  return [year, month, day].join('-');
+}
+document.getElementById("campoData").setAttribute("min", formatDateForInputDate(currentDate));
+
 
 function changeDesconto() {
   var selectDesconto = document.getElementById("selectDesconto");
@@ -61,60 +77,62 @@ function changeCupomTipe(valueTipeCupom) {
   if (valueTipeCupom == "Cupom geral") {
     expCupomUnico.style.display = "none";
     expCupomGeral.style.display = "flex";
-  } else if (valueTipeCupom == "Cupom único"){
+  } else if (valueTipeCupom == "Cupom único") {
     expCupomUnico.style.display = "flex";
     expCupomGeral.style.display = "none";
   }
 }
 changeCupomTipe(document.getElementById("cupomGeral").value);
 
-function validarCampoCodCupom(valueCodCupom){
+function validarCampoCodCupom(valueCodCupom) {
   var codCupomElement = document.getElementById("campoTexto");
   var codCupomP = document.getElementById("codCupomP");
 
-  if(valueCodCupom == ""){
+  if (valueCodCupom == "") {
     codCupomElement.style.borderColor = "var(--redColor)";
     codCupomP.style.display = "block"
 
-    this.isValidCodCupom = false;
-  }else{
+    isValidCodCupom = false;
+    console.log(isValidCodCupom)
+  } else {
     codCupomElement.style.borderColor = "var(--greenColor)";
     codCupomP.style.display = "none"
 
-    this.isValidCodCupom = true;
+    isValidCodCupom = true;
+    console.log(isValidCodCupom)
   }
 }
 
-function validarPorcentagem(valuePorcentagem){
+function validarPorcentagem(valuePorcentagem) {
   var campoPorcentagem = document.getElementById("campoPorcentagem");
   var porcentagemP = document.getElementById("porcentagemP");
 
-  if(valuePorcentagem >= 1 && valuePorcentagem <= 100 && valuePorcentagem != null){
+  if (valuePorcentagem >= 1 && valuePorcentagem <= 100 && valuePorcentagem != null) {
     campoPorcentagem.style.borderColor = "var(--greenColor)";
     porcentagemP.style.display = "none";
 
-    this.isValidPorcentagem = true;
-    this.isValidDinheiroFixo = true;
-  }else{
+    isValidPorcentagem = true;
+    isValidDinheiroFixo = true;
+  } else {
     campoPorcentagem.style.borderColor = "var(--redColor)";
     porcentagemP.style.display = "block";
 
-    this.isValidPorcentagem = false;
-    this.isValidDinheiroFixo = false;
+    isValidPorcentagem = false;
+    isValidDinheiroFixo = false;
   }
 }
 
-function validarDinheiroFixo(valueDinheiroFixo){
+function validarDinheiroFixo(valueDinheiroFixo) {
   var dinheiroDesconto = document.getElementById("dinheiroDesconto");
   var dinheiroP = document.getElementById("dinheiroP");
 
-  if(valueDinheiroFixo >= 0.10 && valueDinheiroFixo != null){
+  if (valueDinheiroFixo >= 0.10 && valueDinheiroFixo != null) {
     dinheiroDesconto.style.borderColor = "var(--greenColor)";
     dinheiroP.style.display = "none";
 
     isValidDinheiroFixo = true;
     isValidPorcentagem = true;
-  }else{
+  } else {
     dinheiroDesconto.style.borderColor = "var(--redColor)";
     dinheiroP.style.display = "block";
 
@@ -123,16 +141,16 @@ function validarDinheiroFixo(valueDinheiroFixo){
   }
 }
 
-function validarValorMinimo(valueValorMinimo){
+function validarValorMinimo(valueValorMinimo) {
   var valorMinimo = document.getElementById("valorMinimo");
   var valorMinimoP = document.getElementById("valorMinimoP");
 
-  if(valueValorMinimo >= 0.10 && valueValorMinimo != null){
+  if (valueValorMinimo >= 0.10 && valueValorMinimo != null) {
     valorMinimo.style.borderColor = "var(--greenColor)";
     valorMinimoP.style.display = "none";
 
     isValidValorMinimo = true;
-  }else{
+  } else {
     valorMinimo.style.borderColor = "var(--redColor)";
     valorMinimoP.style.display = "block";
 
@@ -140,23 +158,38 @@ function validarValorMinimo(valueValorMinimo){
   }
 }
 
-function isValidForm(){
-  if(isValidCodCupom && isValidPorcentagem && isValidDinheiroFixo && isValidValorMinimo){
+function isValidForm() {
+  if (isValidCodCupom && isValidPorcentagem && isValidDinheiroFixo && isValidValorMinimo) {
     enviarForm();
 
     return true;
-  }else {
+  } else {
     alert("Preencha todos os dados pedidos no formulário.")
 
     return false;
   }
 }
 
-function enviarForm(){
-    const form = document.getElementById('formCadastroCupom');
-    const data = new FormData(form);
-    const jsonData = Object.fromEntries(data.entries());
-    console.log(jsonData);
+function enviarForm() {
+  const form = document.getElementById('formCadastroCupom');
+  const data = new FormData(form);
+  const jsonData = Object.fromEntries(data.entries());
+  console.log(jsonData);
 
-    alert('Formulário enviado');
+  alert('Formulário enviado');
+
+  resetValuesAndValidsForm();
+}
+
+function resetValuesAndValidsForm() {
+  document.getElementById('campoTexto').value = "";
+  document.getElementById('campoPorcentagem').value = "";
+  document.getElementById('dinheiroDesconto').value = "";
+  document.getElementById('campoData').value = "";
+  document.getElementById('valorMinimo').value = "";
+
+  isValidCodCupom = false;
+  isValidDinheiroFixo = false;
+  isValidPorcentagem = false;
+  isValidValorMinimo = false;
 }
