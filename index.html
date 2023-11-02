@@ -32,7 +32,7 @@
   </header>
 
   <main>
-    <article class="container border">
+    <article class="container border articleForm">
 
       <h2 class="h2Secundarios">Criar cupom de desconto</h2>
 
@@ -40,11 +40,11 @@
       <div class="radio-buttons">
         <input type="radio" id="cupomGeral" name="cupomTipo" value="Cupom geral" checked
           onchange="changeCupomTipe(this.value)" form="formCadastroCupom">
-        <label for="cupomGeral">Cupom geral</label><br>
+        <label for="cupomGeral">Cupom geral</label>
 
         <input type="radio" id="cupomUnico" name="cupomTipo" value="Cupom único" onchange="changeCupomTipe(this.value)"
           form="formCadastroCupom">
-        <label for="cupomUnico">Cupom único</label><br>
+        <label for="cupomUnico">Cupom único</label>
       </div>
 
       <!-- EXPLICAÇÃO CUPOM UNICO -->
@@ -64,7 +64,8 @@
 
       <!-- FORM CADASTRO DE CUPOM -->
       <form id="formCadastroCupom">
-        <!-- CAMPO CODIGO DE CUPOM -->
+        <div class="divContainerCodigoAndSelectCupom">
+           <!-- CAMPO CODIGO DE CUPOM -->
         <div class="divCamposForm campoCodCupom">
           <label for="campoTexto">Código do cupom</label>
           <input type="text" id="campoTexto" name="cupomCodigo" placeholder="EX: DESCONTO10" required
@@ -80,6 +81,7 @@
             <option value="Porcentagem de desconto">Porcentagem de desconto</option>
           </select>
         </div>
+        </div>
 
         <!-- CAMPO DE PORCENTAGEM -->
         <div class="divCamposForm" id="inputPorcentagem">
@@ -94,7 +96,7 @@
 
         <!-- CAMPO DE DINHEIRO-->
         <div class="divCamposForm" id="inputDinheiro">
-          <label for="campoDinheiro1">Digite o valor do desconto em reais</label>
+          <label for="dinheiroDesconto">Digite o valor do desconto em reais</label>
           <div>
             R$
             <input type="number" id="dinheiroDesconto" name="cupomValor" step="0.01" min="0.10" placeholder="EX: 10"
@@ -103,7 +105,7 @@
           <p class="errorP" id="dinheiroP">O valor de desconto deve ser preenchido.</p>
         </div>
 
-        <h3>Regras do cupom</h3>
+        <h3>REGRAS DO CUPOM</h3>
 
         <!-- SWITCH DE ATIVAR DATA -->
         <div class="divSwitchs">
@@ -114,7 +116,8 @@
           <label for="dataLimiteCheckbox" class="labelCheckbox">Ativar data limite para uso</label>
         </div>
 
-        <!-- CAMPO DATA LIMITE -->
+        <div class="divCamposDataAndValorLimite">
+                  <!-- CAMPO DATA LIMITE -->
         <div class="divCamposForm" id="labelEInputData">
           <label for="campoData">Data limite do cupom</label>
           <input type="date" id="campoData" name="cupomDataLimite" min="2023-04-01">
@@ -123,13 +126,14 @@
 
         <!-- CAMPO VALOR MINIMO -->
         <div class="divCamposForm">
-          <label for="campoDinheiro2">Valor mínimo do pedido</label>
+          <label for="valorMinimo">Valor mínimo do pedido</label>
           <div>
             R$
             <input type="number" id="valorMinimo" name="cupomValorMinimo" step="0.01" placeholder="EX: 10" min="0.10"
               required onmouseleave="validarValorMinimo(this.value)">
           </div>
           <p class="errorP" id="valorMinimoP">O valor mínimo do pedido deve ser preenchido.</p>
+        </div>
         </div>
 
         <!-- SWITCH DE IMPRIMIR CUPOM -->

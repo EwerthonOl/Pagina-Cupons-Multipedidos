@@ -7,18 +7,6 @@ const cuponsAdicionados = [];
 
 let currentDate = new Date();
 
-console.log(currentDate)
-
-let formateData = new Intl.DateTimeFormat('pt-BR', {
-  day: '2-digit',
-  month: '2-digit',
-  year: 'numeric'
-});
-
-let dataDeHojePtBR = `${formateData.format(currentDate)}`;
-
-console.log(dataDeHojePtBR)
-
 function formatDateForInputDate(date) {
   date,
     month = '' + (date.getMonth() + 1),
