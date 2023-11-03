@@ -24,6 +24,7 @@ body {
   padding: .7rem;
 }
 
+/* --------- HEADER PRINCIPAL TELA 1 CSS ATIVAR CUPONS ------- */
 #headerPrincipal {
   display: flex;
   flex-direction: column;
@@ -46,22 +47,12 @@ h1 {
   align-items: center;
   justify-content: center;
 }
+/* --------- -------------------------------- */
 
+/* --------- CSS DOS BOTOES SWITCHS ------- */
 .labelCheckbox {
   margin-left: .5rem;
   font-weight: bold;
-}
-
-.border {
-  border: solid var(--grayColor) 1px;
-  border-radius: 5px;
-}
-
-.container {
-  background-color: var(--whiteColor);
-  padding: 1rem;
-
-  margin-bottom: 1rem;
 }
 
 .switch {
@@ -119,14 +110,32 @@ input:checked+.slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+/* --------- -------------------------------- */
 
+/* --------- CSS DAS BORDAS E CONTAINERS COMUM ------- */
+.border {
+  border: solid var(--grayColor) 1px;
+  border-radius: 5px;
+}
+
+.container {
+  background-color: var(--whiteColor);
+  padding: 1rem;
+
+  margin-bottom: 1rem;
+}
+/* --------- -------------------------------- */
+
+/* --------- CSS DOS TITULOS SECUNDARIOS ------- */
 .h2Secundarios {
   font-size: 1.5rem;
   text-align: center;
 
   margin-bottom: 1rem;
 }
+/* --------- -------------------------------- */
 
+/* --------- CSS DO FORMULARIO ------- */
 #articleForm {
   display: flex;
   flex-direction: column;
@@ -244,7 +253,9 @@ label {
   font-size: 16px;
   font-weight: bold;
 }
+/* --------- -------------------------------- */
 
+/* --------- CSS PARA MANTER A RESPONSIVIDADE EM TELAS DIFERENTES NO FORMULARIO ------- */
 #divContainerCodigoSelectCupom {
   display: flex;
   flex-direction: column;
@@ -319,7 +330,9 @@ label {
 #tableArticle {
   overflow-x: auto;
 }
+/* --------- -------------------------------- */
 
+/* --------- CSS DO GRAFICO ------- */
 #articleGrafic {
   display: flex;
   flex-direction: column;
@@ -334,7 +347,9 @@ label {
   width: 90%;
   height: 90%;
 }
+/* --------- -------------------------------- */
 
+/* --------- CSS DA TABELA DE CUPONS ------- */
 table {
   border-collapse: collapse;
   width: 100%;
@@ -350,7 +365,9 @@ td {
 th {
   background-color: #f2f2f2;
 }
+/* --------- -------------------------------- */
 
+/* MEDIAS PARA RESPONSIVIDADE */
 @media (min-width: 425px) {
   .radio-buttons {
     flex-direction: row;
